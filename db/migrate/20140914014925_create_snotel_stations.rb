@@ -7,9 +7,6 @@ class CreateSnotelStations < ActiveRecord::Migration
       t.string :name
       t.string :token
       t.string :state
-      t.string :weather
-      t.string :temperature
-      t.string :wind
       t.string :triplet
 
       t.timestamps

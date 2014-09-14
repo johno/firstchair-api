@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140914021410) do
+ActiveRecord::Schema.define(version: 20140914024845) do
+
+  create_table "resorts", force: true do |t|
+    t.string   "name"
+    t.string   "token"
+    t.string   "state"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.integer  "base_depth"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "snotel_stations", force: true do |t|
     t.string   "elevation"
@@ -20,21 +31,30 @@ ActiveRecord::Schema.define(version: 20140914021410) do
     t.string   "name"
     t.string   "token"
     t.string   "state"
-    t.string   "weather"
-    t.string   "temperature"
-    t.string   "wind"
     t.string   "triplet"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "weathers", force: true do |t|
+    t.integer  "weatherable_id"
+    t.string   "weatherable_type"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "weather"
     t.string   "summary"
-    t.float    "humidity"
+    t.float    "temperature"
+    t.float    "wind"
     t.float    "visibility"
+    t.float    "humidity"
     t.integer  "nearest_storm_distance"
     t.float    "cloud_cover"
     t.float    "pressure"
     t.float    "ozone"
     t.float    "precip_intensity"
     t.float    "precip_probability"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
