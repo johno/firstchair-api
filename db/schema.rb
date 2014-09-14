@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140914024845) do
+ActiveRecord::Schema.define(version: 20140914180054) do
 
   create_table "resorts", force: true do |t|
     t.string   "name"
@@ -22,6 +22,20 @@ ActiveRecord::Schema.define(version: 20140914024845) do
     t.integer  "base_depth"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "location"
+    t.integer  "vertical"
+    t.integer  "elevation_top"
+    t.integer  "elevation_base"
+    t.integer  "skiable_area"
+    t.integer  "runs"
+    t.integer  "chairlifts"
+    t.integer  "average_snowfall"
+    t.boolean  "night_skiing"
+    t.boolean  "snowmaking"
+    t.string   "website"
+    t.integer  "green_percentage"
+    t.integer  "blue_percentage"
+    t.string   "black_percentage"
   end
 
   create_table "snotel_stations", force: true do |t|
