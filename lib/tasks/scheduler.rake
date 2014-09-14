@@ -5,6 +5,13 @@ task update_snotel_station_weather: :environment do
   end
 end
 
+desc "Update each resort's weather"
+task update_resort_weather: :environment do
+  Resort.find_each(batch_size: 100) do |resort|
+    Resort.update_weather!(resort.id)
+  end
+end
+
 desc "Update snotel station data from snotel gem"
 task update_snotel_station_data_from_gem: :environment do
   Snotel.get_station_data.each do |station_data|
