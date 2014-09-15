@@ -1,5 +1,10 @@
-require 'rails_helper'
+RSpec.describe Resort, type: :model do
 
-RSpec.describe Resort, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:resort) { FactoryGirl.build(:resort) }
+
+  subject { resort }
+
+  it { should be_valid }
+
+  it { should have_one(:weather) }
 end

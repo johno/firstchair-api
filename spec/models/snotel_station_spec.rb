@@ -1,5 +1,10 @@
-require 'rails_helper'
+RSpec.describe SnotelStation, type: :model do
 
-RSpec.describe SnotelStation, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:snotel_station) { FactoryGirl.build(:snotel_station) }
+
+  subject { snotel_station }
+
+  it { should be_valid }
+
+  it { should have_one(:weather) }
 end
