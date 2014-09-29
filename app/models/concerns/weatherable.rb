@@ -24,6 +24,7 @@ module Weatherable
     weather.nearest_storm_distance = currently.nearestStormDistance
 
     weather.save
+    touch
   end
 
   def as_json(options = {})

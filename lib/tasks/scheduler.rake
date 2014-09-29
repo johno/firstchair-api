@@ -36,3 +36,10 @@ task update_resorts_from_data: :environment do
     resort.update(resort_data.merge(state: 'ID'))
   end
 end
+
+desc "Update snowfall data"
+task update_snowfall_data: :environment do
+  SnotelStation.find_each(batch_size: 100) do |snotel_station|
+    SnotelStation.update_snowfall!(snotel_station.id)
+  end
+end

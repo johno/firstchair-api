@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   end
 
   resources :resorts, only: [:index, :show]
-  resources :snotel_stations, only: [:index, :show]
+
+  resources :snotel_stations, only: [:index, :show] do
+    get :daily_snowfall, on: :member
+  end
+
   root to: 'overview#index'
 end

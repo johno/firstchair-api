@@ -14,4 +14,10 @@ class SnotelStationsController < ApplicationController
 
     render json: { snotel_station: @snotel_station }
   end
+
+  def daily_snowfall
+    @daily_snowfall_readings = SnotelStation.find(params[:id]).daily_snowfall_readings
+
+    render json: { daily_snowfall_readings: @daily_snowfall_readings }
+  end
 end
