@@ -10,7 +10,6 @@ group :production do
 end
 
 group :development, :test do
-  gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
@@ -18,6 +17,8 @@ group :development, :test do
 
   gem 'sqlite3'
 end
+
+gem 'rspec' # Outside of dev/test for rake tasks.
 
 gem 'figaro'
 gem 'snotel'
