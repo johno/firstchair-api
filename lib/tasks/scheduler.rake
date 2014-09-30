@@ -50,3 +50,11 @@ task update_historic_snowfall_data: :environment do
     snotel_station.update_snowfall(2000)
   end
 end
+
+desc "Continue historic snowfall data update"
+task continue_historic_snowfall_data_update: :environment do
+  SnotelStation.find_each(batch_size: 100) do |snotel_station|
+    next if snotel_station.daily_snowfall_readings.limit(1).any?
+    snotel_station.update_snowfall(2000)
+  end
+end
