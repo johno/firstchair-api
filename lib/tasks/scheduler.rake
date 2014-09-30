@@ -43,3 +43,10 @@ task update_snowfall_data: :environment do
     SnotelStation.update_snowfall!(snotel_station.id)
   end
 end
+
+desc "Update historic snowfall data"
+task update_historic_snowfall_data: :environment do
+  SnotelStation.find_each(batch_size: 100) do |snotel_station|
+    snotel_station.update_snowfall(2000)
+  end
+end
