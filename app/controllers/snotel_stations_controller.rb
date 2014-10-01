@@ -16,8 +16,14 @@ class SnotelStationsController < ApplicationController
   end
 
   def daily_snowfall
-    @daily_snowfall_readings = SnotelStation.find(params[:id]).daily_snowfall_readings
+    @daily_snowfall_readings = SnotelStation.find(params[:id]).daily_snowfall_readings.order('date DESC')
 
     render json: { daily_snowfall_readings: @daily_snowfall_readings }
+  end
+
+  def hourly_snowfall
+    @hourly_snowfall_readings = SnotelStation.find(params[:id]).hourly_snowfall_readings.order('date DESC')
+
+    render json: { hourly_snowfall_readings: @hourly_snowfall_readings }
   end
 end

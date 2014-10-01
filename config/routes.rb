@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :snotel_stations, only: [:index, :show] do
     get :daily_snowfall, on: :member
+    get :hourly_snowfall, on: :member
   end
 
   root to: 'overview#index'

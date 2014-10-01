@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929014650) do
+ActiveRecord::Schema.define(version: 20141001041112) do
 
   create_table "daily_snowfall_readings", force: true do |t|
     t.datetime "date"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(version: 20140929014650) do
     t.integer  "change_in_snow_depth_in"
     t.integer  "daily_snowfall_trackable_id"
     t.string   "daily_snowfall_trackable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hourly_snowfall_readings", force: true do |t|
+    t.datetime "date"
+    t.float    "snow_water_equivalent_in"
+    t.float    "change_in_snow_water_equivalent_in"
+    t.float    "snow_depth_in"
+    t.float    "change_in_snow_depth_in"
+    t.integer  "hourly_snowfall_trackable_id"
+    t.string   "hourly_snowfall_trackable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
