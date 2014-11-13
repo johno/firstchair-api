@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.6'
 gem 'rails-api'
 
+gem 'pg'
+
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
   gem 'unicorn'
 end
@@ -14,9 +15,9 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda-matchers'
-
-  gem 'sqlite3'
 end
+
+gem 'sqlite3', group: :test
 
 gem 'rspec' # Outside of dev/test for rake tasks.
 

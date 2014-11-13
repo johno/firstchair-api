@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141113200318) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "daily_snowfall_readings", force: true do |t|
     t.datetime "date"
     t.float    "snow_water_equivalent_in"
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 20141113200318) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "hourly_snowfall_readings", force: true do |t|
     t.datetime "date"
