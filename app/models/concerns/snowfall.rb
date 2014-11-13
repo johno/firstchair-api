@@ -9,7 +9,7 @@ module Snowfall
   def update_snowfall(days = 1, options = {})
     update_daily_snowfall(days) unless options[:skip_daily]
     update_hourly_snowfall(days) unless options[:skip_hourly]
-    puts "SNOWFALL: updated the last #{ days } for #{ name }"
+    puts "SNOWFALL: updated the last #{ days } for #{ id }:#{ name }"
   end
 
   def update_daily_snowfall(days)

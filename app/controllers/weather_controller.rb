@@ -12,7 +12,7 @@ class WeatherController < ApplicationController
   def by_location
     if params[:latitude] && params[:longitude]
       set_forecast
-      puts @forecast.inspect
+
       if @forecast
         render json: { weather: @forecast }
       else

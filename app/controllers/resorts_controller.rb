@@ -11,6 +11,7 @@ class ResortsController < ApplicationController
   # GET /resorts/1.json
   def show
     @resort = Resort.find(params[:id])
+    @resort.update_weather
 
     render json: { resort: @resort }
   end

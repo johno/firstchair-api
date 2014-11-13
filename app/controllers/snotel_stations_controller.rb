@@ -11,8 +11,9 @@ class SnotelStationsController < ApplicationController
   # GET /snotel_stations/1.json
   def show
     @snotel_station = SnotelStation.find(params[:id])
+    @snotel_station.update_weather
 
-    render json: { snotel_station: @snotel_station }
+    render json: { snotel_station: @snotel_station.as_json(include_snowfall_data: true) }
   end
 
   def daily_snowfall
