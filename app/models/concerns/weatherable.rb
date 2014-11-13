@@ -26,21 +26,24 @@ module Weatherable
     weather.save
     touch
   end
+  handle_asynchronously :update_weather
 
   def as_json(options = {})
     super.merge(
-      temperature: weather.temperature,
-      summary: weather.summary,
-      weather: weather.weather,
-      wind: weather.wind,
-      humidity: weather.humidity,
-      visibility: weather.visibility,
-      cloud_cover: weather.cloud_cover,
-      pressure: weather.pressure,
-      ozone: weather.ozone,
-      precip_intensity: weather.precip_intensity,
-      precip_probability: weather.precip_probability,
-      nearest_storm_distance: weather.nearest_storm_distance
+      weather: {
+        temperature: weather.temperature,
+        summary: weather.summary,
+        weather: weather.weather,
+        wind: weather.wind,
+        humidity: weather.humidity,
+        visibility: weather.visibility,
+        cloud_cover: weather.cloud_cover,
+        pressure: weather.pressure,
+        ozone: weather.ozone,
+        precip_intensity: weather.precip_intensity,
+        precip_probability: weather.precip_probability,
+        nearest_storm_distance: weather.nearest_storm_distance
+      }
     )
   end
 end

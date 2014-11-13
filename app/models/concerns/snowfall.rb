@@ -34,7 +34,7 @@ module Snowfall
 
     ActiveRecord::Base.transaction do
       data.each do |d|
-        d[:date] = DateTime.strptime(d[:date], "%Y-%m-%d")
+        d[:date] = DateTime.strptime(d[:date], "%Y-%m-%d %H")
         reading = hourly_snowfall_readings.find_or_initialize_by(date: d[:date])
         reading.hourly_snowfall_trackable = self
         reading.update(d)
