@@ -9,8 +9,8 @@ module Snowfall
   def update_snowfall(days = 1, options = {})
     update_daily_snowfall(days) unless options[:skip_daily]
     update_hourly_snowfall(days) unless options[:skip_hourly]
+    puts "SNOWFALL: updated the last #{ days } for #{ name }"
   end
-  handle_asynchronously :update_snowfall
 
   def update_daily_snowfall(days)
     data = Snotel.daily(token.to_sym, days)
@@ -28,8 +28,8 @@ module Snowfall
     end
   end
 
-  def update_hourly_snowfall(days)
-    data = Snotel.hourly(token.to_sym, days * 24)
+  def update_hourly_snowfall(hours)
+    data = Snotel.hourly(token.to_sym, hours)
     return unless data and data.any?
 
     ActiveRecord::Base.transaction do

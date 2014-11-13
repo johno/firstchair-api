@@ -26,7 +26,6 @@ module Weatherable
     weather.save
     touch
   end
-  handle_asynchronously :update_weather
 
   def as_json(options = {})
     super.merge(

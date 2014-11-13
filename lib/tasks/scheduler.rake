@@ -1,8 +1,6 @@
 desc "Update each snotel station's weather"
 task update_snotel_station_weather: :environment do
-  SnotelStation.find_each(batch_size: 100) do |snotel_station|
-    SnotelStation.update_weather!(snotel_station.id)
-  end
+  SnotelStation.delay.update_all_weather
 end
 
 desc "Update each resort's weather"
@@ -39,22 +37,5 @@ end
 
 desc "Update snowfall data"
 task update_snowfall_data: :environment do
-  SnotelStation.find_each(batch_size: 100) do |snotel_station|
-    SnotelStation.update_snowfall!(snotel_station.id)
-  end
-end
-
-desc "Update historic snowfall data"
-task update_historic_snowfall_data: :environment do
-  SnotelStation.find_each(batch_size: 100) do |snotel_station|
-    snotel_station.update_snowfall(2000)
-  end
-end
-
-desc "Continue historic snowfall data update"
-task continue_historic_snowfall_data_update: :environment do
-  SnotelStation.find_each(batch_size: 100) do |snotel_station|
-    next if snotel_station.daily_snowfall_readings.limit(1).any?
-    snotel_station.update_snowfall(2000, skip_hourly: true)
-  end
+  SnotelStation.delay.update_all_snowfall
 end

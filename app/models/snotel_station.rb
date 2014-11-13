@@ -2,13 +2,15 @@ class SnotelStation < ActiveRecord::Base
   include Weatherable
   include Snowfall
 
-  def self.update_weather!(snotel_station_id)
-    snotel_station = SnotelStation.find(snotel_station_id)
-    snotel_station.update_weather
+  def self.update_all_weather
+    SnotelStation.find_each(batch_size: 100) do |snotel_station|
+      snotel_station.update_weather
+    end
   end
 
-  def self.update_snowfall!(snotel_station_id)
-    snotel_station = SnotelStation.find(snotel_station_id)
-    snotel_station.update_snowfall
+  def self.update_all_snowfall
+    SnotelStation.find_each(batch_size: 100) do |snotel_station|
+      snotel_station.update_snowfall(10)
+    end
   end
 end
