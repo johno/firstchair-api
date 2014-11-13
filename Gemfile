@@ -24,3 +24,5 @@ gem 'figaro'
 gem 'snotel'
 gem 'forecast_io'
 gem 'rack-cors', require: 'rack/cors'
+
+gem 'delayed_job_active_record'

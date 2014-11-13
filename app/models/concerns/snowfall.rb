@@ -10,6 +10,7 @@ module Snowfall
     update_daily_snowfall(days) unless options[:skip_daily]
     update_hourly_snowfall(days) unless options[:skip_hourly]
   end
+  handle_asynchronously :update_snowfall
 
   def update_daily_snowfall(days)
     data = Snotel.daily(token.to_sym, days)
