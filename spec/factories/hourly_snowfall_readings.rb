@@ -7,7 +7,6 @@ FactoryGirl.define do
     change_in_snow_water_equivalent_in 1.5
     snow_depth_in 1.5
     change_in_snow_depth_in 1.5
-    hourly_snowfall_trackable_id 1
-    hourly_snowfall_trackable_type "MyString"
+    hourly_snowfall_trackable factory: :snotel_station
   end
 end

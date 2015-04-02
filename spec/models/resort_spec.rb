@@ -4,7 +4,7 @@ RSpec.describe Resort, type: :model do
 
   subject { resort }
 
-  it { should be_valid }
+  it { is_expected.to be_valid }
 
-  it { should have_one(:weather) }
+  it { is_expected.to have_one(:weather) }
 end
