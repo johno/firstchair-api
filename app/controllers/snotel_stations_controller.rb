@@ -2,7 +2,7 @@ class SnotelStationsController < ApplicationController
   # GET /snotel_stations
   # GET /snotel_stations.json
   def index
-    @snotel_stations = SnotelStation.all.group_by(&:state).map { |_, v| v }.flatten
+    @snotel_stations = SnotelStation.all.group_by(&:state).map { |_, v| v.sort { |a, b| a.name <=> b.name } }.flatten
 
     render json: { snotel_stations: @snotel_stations }
   end
