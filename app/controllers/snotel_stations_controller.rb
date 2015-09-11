@@ -4,7 +4,7 @@ class SnotelStationsController < ApplicationController
   def index
     @snotel_stations = SnotelStation.all
 
-    render json: { snotel_stations: @snotel_stations }
+    render json: { snotel_stations: @snotel_stations.as_json(include_snowfall_data: true) }
   end
 
   # GET /snotel_stations/1
@@ -13,7 +13,7 @@ class SnotelStationsController < ApplicationController
     @snotel_station = SnotelStation.find(params[:id])
     @snotel_station.update_weather
 
-    render json: { snotel_station: @snotel_station.as_json(include_snowfall_data: true) }
+    render json: { snotel_station: @snotel_station.as_json(include_snowfall_data: true, include_weather_data: true) }
   end
 
   def daily_snowfall
