@@ -2,7 +2,7 @@ class SnotelStationsController < ApplicationController
   # GET /snotel_stations
   # GET /snotel_stations.json
   def index
-    @snotel_stations = SnotelStation.all
+    @snotel_stations = SnotelStation.all.group_by(&:state).map { |_, v| v }.flatten
 
     render json: { snotel_stations: @snotel_stations.as_json(include_snowfall_data: true) }
   end
