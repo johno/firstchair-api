@@ -3,20 +3,7 @@ class SnotelStation < ActiveRecord::Base
   include Snowfall
 
   def as_json(options = {})
-    if options[:include_weather_data]
-      blob = super.merge(weather: weather.as_json)
-    else
-      blob = super.merge(weather_id: weather.id)
-    end
-
-    if options[:include_snowfall_data]
-      blob.merge!(
-        last_7_days_snowfall_in: DailySnowfallReading.where(daily_snowfall_trackable: self).limit(7).order('date DESC').map(&:snow_depth_in).reduce(:+),
-        last_24_hours_snowfall_in: HourlySnowfallReading.where(hourly_snowfall_trackable: self).limit(1).order('date DESC').map(&:snow_depth_in).reduce(:+)
-      )
-    end
-
-    blob
+    super.merge(weather: weather.as_json)
   end
 
   def self.update_all_weather

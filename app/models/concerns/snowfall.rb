@@ -8,7 +8,14 @@ module Snowfall
 
   def update_snowfall(days = 1, options = {})
     update_daily_snowfall(days) unless options[:skip_daily]
-    update_hourly_snowfall(days) unless options[:skip_hourly]
+    update_hourly_snowfall(days * 24) unless options[:skip_hourly]
+
+    self.last_7_days_snowfall_in = DailySnowfallReading.where(daily_snowfall_trackable: self)
+                                     .limit(7).order('date DESC').map(&:snow_depth_in).reduce(:+)
+    self.last_24_hours_snowfall_in = HourlySnowfallReading.where(hourly_snowfall_trackable: self)
+                                       .limit(1).order('date DESC').map(&:snow_depth_in).reduce(:+)
+    save!
+
     puts "SNOWFALL: updated the last #{ days } for #{ id }:#{ name }"
   end
 
