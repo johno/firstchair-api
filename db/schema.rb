@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113200318) do
+ActiveRecord::Schema.define(version: 20150918182302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 20141113200318) do
     t.string   "triplet"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "last_24_hours_snowfall_in"
+    t.integer  "last_7_days_snowfall_in"
   end
 
   create_table "weathers", force: true do |t|
