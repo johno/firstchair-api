@@ -36,6 +36,7 @@ module Snowfall
         reading.daily_snowfall_trackable = self
         unless reading.update(d)
           puts "INVALID READING FOR #{ reading.inspect } with #{ d.inspect }"
+          puts reading.errors.inspect
         end
       end
 
@@ -57,6 +58,7 @@ module Snowfall
         reading.hourly_snowfall_trackable = self
         unless reading.update(d)
           puts "INVALID READING FOR #{ reading.inspect } with #{ d.inspect }"
+          puts reading.errors.inspect
         end
       end
 
