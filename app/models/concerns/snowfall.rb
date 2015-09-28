@@ -8,7 +8,7 @@ module Snowfall
 
   def update_snowfall(days = 1, options = {})
     update_daily_snowfall(days) unless options[:skip_daily]
-    update_hourly_snowfall(days * 24) unless options[:skip_hourly]
+    update_hourly_snowfall(days) unless options[:skip_hourly]
 
     # update_snowfall_aggregates!
     puts "SNOWFALL: updated the last #{ days } for #{ id }:#{ name }"
