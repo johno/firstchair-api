@@ -12,6 +12,7 @@ class SnotelStationsController < ApplicationController
   def show
     @snotel_station = SnotelStation.find(params[:id])
     @snotel_station.update_weather
+    @snotel_station.update_snowfall_aggregates!
 
     render json: { snotel_station: @snotel_station.as_json(include_snowfall_data: true, include_weather_data: true) }
   end
