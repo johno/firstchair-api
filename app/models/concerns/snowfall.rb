@@ -18,21 +18,26 @@ module Snowfall
     self.last_7_days_snowfall_in = DailySnowfallReading.where(daily_snowfall_trackable: self)
                                      .limit(7).order('date DESC').map(&:snow_depth_in).reduce(:+)
     self.last_24_hours_snowfall_in = HourlySnowfallReading.where(hourly_snowfall_trackable: self)
-                                       .limit(1).order('date DESC').map(&:snow_depth_in).reduce(:+)
+                                       .limit(24).order('date DESC').map(&:snow_depth_in).reduce(:+)
     save!
 
   end
 
   def update_daily_snowfall(days)
     data = Snotel.daily(token.to_sym, days)
-    return unless data and data.any?
+    if data.blank?
+      puts "NO SNOWFALL FOR #{ self.inspect }"
+      return
+    end
 
     ActiveRecord::Base.transaction do
       data.each do |d|
         d[:date] = DateTime.strptime(d[:date], "%Y-%m-%d")
         reading = daily_snowfall_readings.find_or_initialize_by(date: d[:date])
         reading.daily_snowfall_trackable = self
-        reading.update(d)
+        unless reading.update(d)
+          puts "INVALID READING FOR #{ reading.inspect } with #{ d.inspect }"
+        end
       end
 
       touch
@@ -41,14 +46,19 @@ module Snowfall
 
   def update_hourly_snowfall(hours)
     data = Snotel.hourly(token.to_sym, hours)
-    return unless data and data.any?
+    if data.blank?
+      puts "NO SNOWFALL FOR #{ self.inspect }"
+      return
+    end
 
     ActiveRecord::Base.transaction do
       data.each do |d|
         d[:date] = DateTime.strptime(d[:date], "%Y-%m-%d %H")
         reading = hourly_snowfall_readings.find_or_initialize_by(date: d[:date])
         reading.hourly_snowfall_trackable = self
-        reading.update(d)
+        unless reading.update(d)
+          puts "INVALID READING FOR #{ reading.inspect } with #{ d.inspect }"
+        end
       end
 
       touch
